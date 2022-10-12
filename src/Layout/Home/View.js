@@ -67,6 +67,9 @@ export default function View({ cards, setCards }) {
                 </button>
             </div>
         </div>
+        <h3>Cards</h3>
+
+        {cardList}
       </div>
     </div>
   );
