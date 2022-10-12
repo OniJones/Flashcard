@@ -12,7 +12,7 @@ export default function Home({ decks, setDecks }) {
             setDecks(decksData);
         }
         fetchDecks();
-    }, []);
+    }, [setDecks]);
 
     const deckList = decks.map((deck) => <Deck deck={deck} />);
 

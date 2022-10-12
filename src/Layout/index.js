@@ -3,9 +3,9 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home/Home";
-
+import View from "./Home/View";
 import Study from "./Home/Study";
-
+import CreateDeck from "./Home/CreateDeck";
 
 
 
@@ -30,12 +30,12 @@ function Layout() {
               setDecks={setDecks} />
           </Route>
           <Route exact path="/decks/new">
-            {/* <CreateDeck /> */}
+            <CreateDeck />
           </Route>
           <Route exact path="/decks/:deckId">
-            {/* <View
+            <View
               cards={cards}
-              setCards={setCards} /> */}
+              setCards={setCards} />
           </Route>
           <Route exact path="/decks/:deckId/edit">
             
@@ -44,6 +44,9 @@ function Layout() {
             <Study
               cards={cards}
               setCards={setCards} />
+          </Route>
+          <Route path="/decks/:deckId/cards/new">
+            
           </Route>
           <NotFound />
         </Switch>

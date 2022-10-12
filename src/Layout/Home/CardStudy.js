@@ -14,7 +14,7 @@ export default function CardStudy({ selectedDeck }) {
     };
 
     const nextButtonHandler = () => {
-        if (currentIndex < cards.legth -1) {
+        if (currentIndex < cards.length -1) {
             setCurrentIndex(currentIndex + 1);
             setFront(true);
         } else {
