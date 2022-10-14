@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import View from "./Home/View";
 import Study from "./Home/Study";
@@ -18,17 +18,12 @@ function Layout() {
 
 
   return (
-    <Router>
+    <div>
       <Header />
       <div className="container">
         {/* TODO: Implement the screen starting here */}
 
         <Switch>
-          <Route exact path="/">
-            <Home 
-              decks={decks}
-              setDecks={setDecks} />
-          </Route>
           <Route exact path="/decks/new">
             <CreateDeck />
           </Route>
@@ -52,12 +47,17 @@ function Layout() {
           <Route path="/decks/:deckId/cards/:cardId/edit">
             <EditCard />
           </Route>
-          <Route path="*">
+          <Route exact path="/">
+            <Home 
+              decks={decks}
+              setDecks={setDecks} />
+          </Route>
+          <Route>
             <NotFound />
           </Route>
         </Switch>
       </div>
-    </Router>
+    </div>
   );
 }
 

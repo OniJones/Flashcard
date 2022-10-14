@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { deleteCard } from "../../utils/api";
 
-export default function Card({ card, selectedDeck }) {
+export default function Card({ card }) {
 	const history = useHistory();
 	const { url } = useRouteMatch();
 	const cardId = card.id;
@@ -50,11 +50,11 @@ export default function Card({ card, selectedDeck }) {
 					<p className="card-text">{ card.front }</p>
 					<p>{ card.back }</p>
 				</div>
-				<div className="d-flex">
+				<div className="d-flex mb-3">
 					<Link to={`${url}/cards/$card.id/edit`}>
-						<button type="button" className="btn btn-secondary">Edit</button>
+						<button type="button" className="btn btn-secondary mx-3">Edit</button>
 					</Link>
-					<button type="button" className="btn btn-danger ml-3" onClick={deleteHandler}>Delete</button>
+					<button type="button" className="btn btn-danger" onClick={deleteHandler}>Delete</button>
 				</div>
 			</section>
 		</main>

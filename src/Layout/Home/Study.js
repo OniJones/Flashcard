@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { readDeck } from '../../utils/api';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CardStudy from './CardStudy';
 
 export default function Study() {
     const [ selectedDeck, setSelectedDeck ] = useState({ cards: [] });
     const { deckId } = useParams();
-    console.log(deckId);
+    // console.log(deckId);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -24,7 +24,10 @@ export default function Study() {
             <nav aria-label='breadcrumb'>
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <a href='/'>Home</a>
+                        <Link to={'/'}>Home</Link>
+                    </li>
+                    <li className='breadcrumb-item'>
+                        <Link to={`/decks/${deckId}`}>{ selectedDeck.name }</Link>
                     </li>
                     <li className='breadcrumb-item active' aria-current='page'>
                         Study
