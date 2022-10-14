@@ -39,7 +39,7 @@ export default function CardForm({ editFront = "", editBack = "", deckId, cardId
 
   return (
     <div className=''>
-        <form unSubmit={isNew ? handleCreateSubmit : handleEditSubmit}>
+        <form onSubmit={isNew ? handleCreateSubmit : handleEditSubmit}>
             <div className='row'>
                 <label htmlFor='front' className='form-label ml-3'>
                     Front

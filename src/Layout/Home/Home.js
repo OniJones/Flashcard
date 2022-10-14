@@ -14,7 +14,7 @@ export default function Home({ decks, setDecks }) {
         fetchDecks();
     }, [setDecks]);
 
-    const deckList = decks.map((deck) => <Deck deck={deck} />);
+    const deckList = decks.map((deck, index) => <Deck key={index} deck={deck} />);
 
     return (
         <div>

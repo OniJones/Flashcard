@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { readDeck, deleteCard } from '../../utils/api';
+import { readDeck, deleteDeck } from '../../utils/api';
 import Card from './Card';
 
 export default function View({ cards, setCards }) {
@@ -9,16 +9,10 @@ export default function View({ cards, setCards }) {
     const { deckId } = useParams();
     const history = useHistory();
 
-    async function deleteHandler() {
-        const abortController = new AbortController();
-        if (
-            window.confirm("Delete this card?\n\nYou will not be able to recover it.")
-        ) {
-            await deleteCard(cards.id, abortController.signal);
-			history.push("/");
-        }
-        return () => abortController.abort();
-    }
+    const deleteHandler = () => {
+		const abortController = new AbortController();
+		window.confirm("Delete this deck?\n\nYou will not be able to recover it.") ? deleteDeck(deckId, abortController.signal).then(history.push("/")) : history.go("/")
+	}
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -30,10 +24,10 @@ export default function View({ cards, setCards }) {
         }
         fetchDecks();
         return () => abortController.abort();
-    }, [deckId, setCards]);
+    }, [ deckId, setCards ]);
 
-    const cardList = cards.map((card) => (
-        <Card card={card} deckId={deckId} selectedDeck={selectedDeck} />
+    const cardList = cards.map((card, index) => (
+        <Card card={card} key={index} deckId={deckId} selectedDeck={selectedDeck} />
     ));
 
   return (
@@ -45,7 +39,7 @@ export default function View({ cards, setCards }) {
                     <Link to='/'>Home</Link>
                 </li>
                 <li className='breadcrumb-item active' aria-current='page'>
-                    {selectedDeck.name}
+                    { selectedDeck.name }
                 </li>
             </ol>
         </nav>
@@ -53,23 +47,23 @@ export default function View({ cards, setCards }) {
             <div className='card-body'>
                 <h4 className='card-title'>{ selectedDeck.name }</h4>
                 <p className='card-text'>{selectedDeck.description}</p>
-                <Link to={`/decks/${deckId}/edit`} className='card-link'>
+                <Link to={`/decks/${ deckId }/edit`} className='card-link'>
                     <button className='btn btn-secondary'>Edit</button>
                 </Link>
-                <Link to={`/decks/${deckId}/study`} className='card-link'>
+                <Link to={`/decks/${ deckId }/study`} className='card-link'>
                     <button className='btn btn-primary'>Study</button>
                 </Link>
-                <Link to={`/decks/${deckId}/cards/new`} className='card-link'>
+                <Link to={`/decks/${ deckId }/cards/new`} className='card-link'>
                     <button className='btn btn-primary'>Add Cards</button>
                 </Link>
-                <button className='btn btn-danger ml-3' onClick={deleteHandler}>
+                <button className='btn btn-danger ml-3' onClick={ deleteHandler }>
                     Delete
                 </button>
             </div>
         </div>
         <h3>Cards</h3>
 
-        {cardList}
+        { cardList }
       </div>
     </div>
   );
