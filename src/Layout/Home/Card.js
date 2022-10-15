@@ -51,7 +51,7 @@ export default function Card({ card }) {
 					<p>{ card.back }</p>
 				</div>
 				<div className="d-flex mb-3">
-					<Link to={`${url}/cards/$card.id/edit`}>
+					<Link to={`${url}/cards/${cardId}/edit`}>
 						<button type="button" className="btn btn-secondary mx-3">Edit</button>
 					</Link>
 					<button type="button" className="btn btn-danger" onClick={deleteHandler}>Delete</button>
