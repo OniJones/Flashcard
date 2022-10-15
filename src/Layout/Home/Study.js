@@ -6,16 +6,9 @@ import CardStudy from './CardStudy';
 export default function Study() {
     const [ selectedDeck, setSelectedDeck ] = useState({ cards: [] });
     const { deckId } = useParams();
-    // console.log(deckId);
 
     useEffect(() => {
-        const abortController = new AbortController();
-        // async function fetchDecks() {
-        //     const decksData = await readDeck(deckId, abortController.signal);
-        //     setSelectedDeck(decksData);
-        // }
-        // fetchDecks();
-        // return () => abortController.abort();
+        const abortController = new AbortController()
 
         readDeck(deckId, abortController.signal).then(setSelectedDeck)
     }, [deckId]);
